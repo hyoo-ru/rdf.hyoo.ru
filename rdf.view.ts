@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	export class $mol_app_rdf extends $.$mol_app_rdf {
+	export class $hyoo_rdf extends $.$hyoo_rdf {
 
 		uri( next? : string ) {
 			return this.$.$mol_state_arg.value( 'uri' , next ) || super.uri()
