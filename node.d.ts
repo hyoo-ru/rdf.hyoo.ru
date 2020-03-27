@@ -1120,9 +1120,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-}
-
-declare namespace $ {
     class $mol_image extends $mol_view {
         dom_name(): string;
         field(): {
@@ -1131,6 +1128,9 @@ declare namespace $ {
         };
         uri(): string;
     }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
