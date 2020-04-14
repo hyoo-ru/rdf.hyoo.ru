@@ -21,7 +21,7 @@ namespace $.$$ {
 
 			for( const descr of this.response().documentElement.children ) {
 
-				const rel = descr.getAttributeNS( 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' , 'about' )
+				const rel = descr.getAttributeNS( 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' , 'about' )!
 				const abs = new URL( rel , this.uri() ).toString()
 				data[ abs ] = data[ abs ] || {}
 				
@@ -29,10 +29,10 @@ namespace $.$$ {
 					
 					const pred = item.namespaceURI + item.localName
 
-					let resource = item.getAttributeNS( 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' , 'resource' )
+					let resource = item.getAttributeNS( 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' , 'resource' )!
 					if( resource != null ) resource = new URL( resource , this.uri() ).toString()
 					
-					const value = item.textContent
+					const value = item.textContent!
 					
 					data[ abs ][ pred ] = data[ abs ][ pred ] || []
 					data[ abs ][ pred ].push({

@@ -1,4 +1,6 @@
 $hyoo_rdf $mol_page
+	attr *
+		mol_theme \$mol_theme_auto
 	title @ \RDF graph browser
 	tools / <= Source $mol_link_iconed
 		uri \https://github.com/eigenmethod/mol/tree/master/app/rdf
