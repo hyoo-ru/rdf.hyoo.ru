@@ -3536,7 +3536,7 @@ var $;
         version() {
             return this.stat().mtime.getTime().toString(36).toUpperCase();
         }
-        exists(next) {
+        exists(next, force) {
             let exists = true;
             try {
                 this.stat();
@@ -4708,7 +4708,7 @@ var $;
         setTimeout($_1.$mol_log_group('$mol_test', () => {
             scheduled = false;
             $mol_test_run();
-        }), 500);
+        }), 0);
     }
     $_1.$mol_test_schedule = $mol_test_schedule;
     $_1.$mol_test_mocks.push(context => {
