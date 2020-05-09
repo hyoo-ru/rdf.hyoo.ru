@@ -1,48 +1,3 @@
-$hyoo_rdf $mol_page
-	attr *
-		mol_theme \$mol_theme_auto
-	title @ \RDF graph browser
-	tools / <= Source $mol_link_iconed
-		uri \https://github.com/eigenmethod/mol/tree/master/app/rdf
-		title \
-	sub /
-		<= Head
-		<= Uri $mol_string
-			value?val <=> uri?val \http://dbpedia.org/ontology/
-			hint <= uri_hint \URI
-		<= Body
-	body / <= Subjects $mol_list rows <= subject_rows /
-	Subject_row!uri $mol_view sub /
-		<= Subject!uri $mol_link
-			title <= subject_title!uri \
-			uri <= subject_uri!uri \
-		<= Predicates!uri $mol_list rows <= predicate_rows!uri /
-	Predicate_row!id $mol_view sub /
-		<= Predicate!id $mol_link
-			title <= predicate_title!id \
-			uri <= predicate_uri!id \
-		<= Objects!id $mol_list rows <= object_rows!id /
-	Resource!id $mol_link
-		title <= resource_title!id \
-		uri <= resource_uri!id \
-	Value!id $mol_view sub / <= value!id \
-
-$mol_page $mol_view
-	sub /
-		<= Head $mol_view
-			sub <= head /
-				<= Title $mol_button
-					sub /
-						<= title
-					event_click?val <=> event_top?val null
-				<= Tools $mol_view
-					sub <= tools /$mol_view_content
-		<= Body $mol_scroll
-			scroll_top?val <=> body_scroll_top?val 0
-			sub <= body /$mol_view_content
-		<= Foot $mol_view
-			sub <= foot /$mol_view
-
 $mol_button $mol_view
 	enabled true
 	minimal_height 40
@@ -61,15 +16,6 @@ $mol_button $mol_view
 	sub /$mol_view_content
 		<= title
 
-$mol_button_typed $mol_button
-
-$mol_button_major $mol_button_typed
-	attr *
-		^
-		mol_theme \$mol_theme_accent
-
-$mol_button_minor $mol_button_typed
-
 $mol_scroll $mol_view
 	minimal_height 0
 	_event_scroll_timer?val null
@@ -80,6 +26,22 @@ $mol_scroll $mol_view
 	event *
 		^
 		scroll?event <=> event_scroll?event null
+
+$mol_page $mol_view
+	sub /
+		<= Head $mol_view
+			sub <= head /
+				<= Title $mol_button
+					sub /
+						<= title
+					event_click?val <=> event_top?val null
+				<= Tools $mol_view
+					sub <= tools /$mol_view_content
+		<= Body $mol_scroll
+			scroll_top?val <=> body_scroll_top?val 0
+			sub <= body /$mol_view_content
+		<= Foot $mol_view
+			sub <= foot /$mol_view
 
 $mol_link $mol_view
 	dom_name \a
@@ -97,6 +59,13 @@ $mol_link $mol_view
 		^
 		click?event <=> click?event <=> event_click?event null
 
+$mol_image $mol_view
+	dom_name \img
+	field *
+		^
+		src <= uri \
+		alt <= title
+
 $mol_link_iconed $mol_link
 	sub /
 		<= Icon $mol_image
@@ -105,13 +74,6 @@ $mol_link_iconed $mol_link
 	content /
 		<= title <= uri
 	host \
-
-$mol_image $mol_view
-	dom_name \img
-	field *
-		^
-		src <= uri \
-		alt <= title
 
 $mol_string $mol_view
 	dom_name \input
@@ -145,3 +107,32 @@ $mol_list $mol_view
 	view_window /
 		0
 		0
+
+$hyoo_rdf $mol_page
+	attr *
+		mol_theme \$mol_theme_auto
+	title @ \RDF graph browser
+	tools / <= Source $mol_link_iconed
+		uri \https://github.com/eigenmethod/mol/tree/master/app/rdf
+		title \
+	sub /
+		<= Head
+		<= Uri $mol_string
+			value?val <=> uri?val \http://dbpedia.org/ontology/
+			hint <= uri_hint \URI
+		<= Body
+	body / <= Subjects $mol_list rows <= subject_rows /
+	Subject_row!uri $mol_view sub /
+		<= Subject!uri $mol_link
+			title <= subject_title!uri \
+			uri <= subject_uri!uri \
+		<= Predicates!uri $mol_list rows <= predicate_rows!uri /
+	Predicate_row!id $mol_view sub /
+		<= Predicate!id $mol_link
+			title <= predicate_title!id \
+			uri <= predicate_uri!id \
+		<= Objects!id $mol_list rows <= object_rows!id /
+	Resource!id $mol_link
+		title <= resource_title!id \
+		uri <= resource_uri!id \
+	Value!id $mol_view sub / <= value!id \
