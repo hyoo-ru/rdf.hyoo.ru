@@ -1,3 +1,5 @@
 {
-	"$hyoo_rdf_title": "RDF graph browser"
+	"$hyoo_rdf_title": "RDF graph browser",
+	"$mol_lights_toggle_hint": "Toggle lights",
+	"$mol_link_source_hint": "Source code"
 }
