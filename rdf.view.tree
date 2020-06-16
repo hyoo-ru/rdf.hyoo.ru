@@ -1,10 +1,11 @@
 $hyoo_rdf $mol_page
-	attr *
-		mol_theme \$mol_theme_auto
+	plugins /
+		<= Theme $mol_theme_auto
 	title @ \RDF graph browser
-	tools / <= Source $mol_link_iconed
-		uri \https://github.com/eigenmethod/mol/tree/master/app/rdf
-		title \
+	tools /
+		<= Lights $mol_lights_toggle
+		<= Source_link $mol_link_source
+			uri \https://github.com/hyoo-ru/rdf.hyoo.ru
 	sub /
 		<= Head
 		<= Uri $mol_string
