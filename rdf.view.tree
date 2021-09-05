@@ -2,16 +2,15 @@ $hyoo_rdf $mol_page
 	plugins /
 		<= Theme $mol_theme_auto
 	title @ \RDF graph browser
+	head /
+		<= Uri $mol_string
+			value?val <=> uri?val \http://dbpedia.org/ontology/
+			hint <= uri_hint \URI
+		<= Tools
 	tools /
 		<= Lights $mol_lights_toggle
 		<= Source_link $mol_link_source
 			uri \https://github.com/hyoo-ru/rdf.hyoo.ru
-	sub /
-		<= Head
-		<= Uri $mol_string
-			value?val <=> uri?val \http://dbpedia.org/ontology/
-			hint <= uri_hint \URI
-		<= Body
 	body / <= Subjects $mol_list rows <= subject_rows /
 	Subject_row!uri $mol_view sub /
 		<= Subject!uri $mol_link

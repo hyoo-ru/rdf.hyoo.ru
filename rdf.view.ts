@@ -54,7 +54,7 @@ namespace $.$$ {
 		}
 
 		subject_title( uri : string ) {
-			return uri.replace( /.*[\/#]/ , '' )
+			return uri.replace( /.*[\/#]/ , '' ) || '#'
 		}
 
 		subject_uri( uri : string ) {
@@ -68,7 +68,7 @@ namespace $.$$ {
 		}
 
 		predicate_title( { subject , predicate } : { subject : string , predicate : string } ) {
-			return predicate.replace( /.*[\/#]/ , '' )
+			return predicate.replace( /.*[\/#]/ , '' ) || '#'
 		}
 
 		predicate_uri( { subject , predicate } : { subject : string , predicate : string } ) {
@@ -86,7 +86,7 @@ namespace $.$$ {
 
 		resource_title( { subject , predicate , object } : { subject : string , predicate : string , object : string } ) {
 			const data = this.data()[ subject ][ predicate ][ object ]
-			return data.resource.replace( /.*[\/#]/ , '' )
+			return data.resource.replace( /.*[\/#]/ , '' ) || '#'
 		}
 
 		resource_uri( { subject , predicate , object } : { subject : string , predicate : string , object : string } ) {
