@@ -16,7 +16,7 @@
 }
 
 [hyoo_rdf_subject] {
-	flex: 1 1 15rem;
+	flex: 1 100 15rem;
 	position: sticky;
 	top: 0;
 }
@@ -24,7 +24,7 @@
 [hyoo_rdf_predicates] {
 	display: flex;
 	flex-direction: column;
-	flex: 100 1 66%;
+	flex: 100 1 75%;
 }
 
 [hyoo_rdf_predicate_row] {
@@ -35,7 +35,7 @@
 }
 
 [hyoo_rdf_predicate] {
-	flex: 1 1 15rem;
+	flex: 1 100 15rem;
 	position: sticky;
 	top: 0;
 }
@@ -43,7 +43,7 @@
 [hyoo_rdf_objects] {
 	display: flex;
 	flex-direction: column;
-	flex: 100 1 50%;
+	flex: 100 1 66%;
 }
 
 [hyoo_rdf_resource] {
