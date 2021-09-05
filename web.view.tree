@@ -46,6 +46,44 @@ $mol_link $mol_view
 $mol_theme_auto $mol_plugin
 	attr * mol_theme <= theme \
 
+$mol_hotkey $mol_plugin
+	event *
+		^
+		keydown?event <=> keydown?event null
+	key *
+	mod_ctrl false
+	mod_alt false
+	mod_shift false
+
+$mol_string $mol_view
+	dom_name \input
+	enabled true
+	minimal_height 40
+	autocomplete false
+	selection?val /number
+	auto /
+		<= selection_watcher null
+	field *
+		^
+		disabled <= disabled false
+		value <= value_changed?val <=> value?val \
+		placeholder <= hint \ 
+		spellcheck <= spellcheck false
+		autocomplete <= autocomplete_native \
+		selectionEnd <= selection_end 0
+		selectionStart <= selection_start 0
+	attr *
+		^
+		maxlength <= length_max Infinity
+		type <= type?val \text
+	event *
+		^
+		input?event <=> event_change?event null
+		keydown?event <=> event_key_press?event null
+	plugins /
+		<= Submit $mol_hotkey
+			key * enter?event <=> submit?event null
+
 $mol_speck $mol_view
 	attr *
 		^
@@ -85,7 +123,7 @@ $mol_check $mol_button_minor
 		mol_check_checked <= checked?val false
 		aria-checked <= checked?val false
 		role \checkbox
-	sub /
+	sub /$mol_view_content
 		<= Icon null
 		<= label /
 			<= Title $mol_view
@@ -136,39 +174,6 @@ $mol_link_source $mol_link
 	sub /
 		<= Icon $mol_icon_github_circle
 
-$mol_hotkey $mol_plugin
-	event *
-		^
-		keydown?event <=> keydown?event null
-	key *
-	mod_ctrl false
-	mod_alt false
-	mod_shift false
-
-$mol_string $mol_view
-	dom_name \input
-	enabled true
-	minimal_height 40
-	autocomplete false
-	field *
-		^
-		disabled <= disabled false
-		value <= value_changed?val <=> value?val \
-		placeholder <= hint \
-		spellcheck <= spellcheck false
-		autocomplete <= autocomplete_native \
-	attr *
-		^
-		maxlength <= length_max Infinity
-		type <= type?val \text
-	event *
-		^
-		input?event <=> event_change?event null
-		keydown?event <=> event_key_press?event null
-	plugins /
-		<= Submit $mol_hotkey
-			key * enter?event <=> submit?event null
-
 $mol_list $mol_view
 	render_visible_only true
 	render_over 0
@@ -184,16 +189,15 @@ $hyoo_rdf $mol_page
 	plugins /
 		<= Theme $mol_theme_auto
 	title @ \RDF graph browser
+	head /
+		<= Uri $mol_string
+			value?val <=> uri?val \http://dbpedia.org/ontology/
+			hint <= uri_hint \URI
+		<= Tools
 	tools /
 		<= Lights $mol_lights_toggle
 		<= Source_link $mol_link_source
 			uri \https://github.com/hyoo-ru/rdf.hyoo.ru
-	sub /
-		<= Head
-		<= Uri $mol_string
-			value?val <=> uri?val \http://dbpedia.org/ontology/
-			hint <= uri_hint \URI
-		<= Body
 	body / <= Subjects $mol_list rows <= subject_rows /
 	Subject_row!uri $mol_view sub /
 		<= Subject!uri $mol_link
@@ -209,39 +213,3 @@ $hyoo_rdf $mol_page
 		title <= resource_title!id \
 		uri <= resource_uri!id \
 	Value!id $mol_view sub / <= value!id \
-
-$mol_view_tree_test_attributes_super $mol_view
-	some *
-		a 0
-		b 2
-
-$mol_view_tree_test_attributes $mol_view_tree_test_attributes_super
-	some *
-		^
-		a 1
-
-$mol_view_tree_test_binding $mol_view
-	value?val <=> task_title_new?val \123
-	enabled <= head_complete_enabled false
-
-$mol_view_tree_test_binding_right $mol_view
-	Test $mol_view_tree_test_binding_right_test
-		width?v => outer_width?v
-
-$mol_view_tree_test_binding_right_test $mol_view
-	width?val 0
-
-$mol_view_tree_test_simple $mol_view
-	some 1
-	bool true
-	str \test
-	arr /
-	arr_string /string
-
-$mol_view_tree_test_attributes_subcomponent $mol_view
-	- Comment
-	Page!index $mol_view_tree_test_attributes_subcomponent_page
-		Sub <= page!index null
-
-$mol_view_tree_test_attributes_subcomponent_page $mol_view
-	Sub null
