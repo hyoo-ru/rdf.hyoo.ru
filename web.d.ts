@@ -1625,7 +1625,7 @@ declare namespace $ {
         head(): readonly any[];
         tools(): readonly any[];
         body(): readonly any[];
-        Subject_row(uri: any): $mol_view;
+        Subject_row(id: any): $mol_view;
         Predicate_row(id: any): $mol_view;
         Resource(id: any): $$.$mol_link;
         Value(id: any): $mol_view;
@@ -1637,11 +1637,11 @@ declare namespace $ {
         Source_link(): $mol_link_source;
         subject_rows(): readonly any[];
         Subjects(): $$.$mol_list;
-        subject_title(uri: any): string;
-        subject_uri(uri: any): string;
-        Subject(uri: any): $$.$mol_link;
-        predicate_rows(uri: any): readonly any[];
-        Predicates(uri: any): $$.$mol_list;
+        subject_title(id: any): string;
+        subject_uri(id: any): string;
+        Subject(id: any): $$.$mol_link;
+        predicate_rows(id: any): readonly any[];
+        Predicates(id: any): $$.$mol_list;
         predicate_title(id: any): string;
         predicate_uri(id: any): string;
         Predicate(id: any): $$.$mol_link;
