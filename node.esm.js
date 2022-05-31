@@ -1742,26 +1742,7 @@ var $;
             }
         }
         resync(...args) {
-            let res;
-            try {
-                res = this.recall(...args);
-            }
-            catch (error) {
-                if (error instanceof Promise)
-                    $mol_fail_hidden(error);
-                res = error;
-            }
-            try {
-                this.once();
-            }
-            catch (error) {
-                if (error instanceof Promise)
-                    $mol_fail_hidden(error);
-            }
-            return this.put(res);
-        }
-        recall(...args) {
-            return this.task.call(this.host, ...args);
+            return this.put(this.task.call(this.host, ...args));
         }
         once() {
             return this.sync();
@@ -1810,9 +1791,6 @@ var $;
     __decorate([
         $mol_wire_method
     ], $mol_wire_atom.prototype, "resync", null);
-    __decorate([
-        $mol_wire_method
-    ], $mol_wire_atom.prototype, "recall", null);
     __decorate([
         $mol_wire_method
     ], $mol_wire_atom.prototype, "once", null);
@@ -5532,7 +5510,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("hyoo/rdf/rdf.view.css", "[hyoo_rdf_body] {\n\tpadding: 0;\n}\n\n[hyoo_rdf_subjects] {\n\tmargin: var(--mol_gap_block);\n\tdisplay: flex;\n\tflex-direction: column;\n}\n\n[hyoo_rdf_subject_row] {\n\tdisplay: flex;\n\tbox-shadow: 0 0 0 1px var(--mol_theme_line);\n\tbackground: var(--mol_theme_back);\n\talign-items: flex-start;\n}\n\n[hyoo_rdf_subject] {\n\tflex: 1 100 15rem;\n\tposition: sticky;\n\ttop: 0;\n}\n\n[hyoo_rdf_predicates] {\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex: 100 1 75%;\n}\n\n[hyoo_rdf_predicate_row] {\n\tdisplay: flex;\n\tbox-shadow: 0 0 0 1px var(--mol_theme_line);\n\tbackground: var(--mol_theme_back);\n\talign-items: flex-start;\n}\n\n[hyoo_rdf_predicate] {\n\tflex: 1 100 15rem;\n\tposition: sticky;\n\ttop: 0;\n}\n\n[hyoo_rdf_objects] {\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex: 100 1 66%;\n}\n\n[hyoo_rdf_resource] {\n\tdisplay: flex;\n\tbox-shadow: 0 0 0 1px var(--mol_theme_line);\n\tbackground: var(--mol_theme_back);\n\tmin-height: calc( 1.5em + 1rem );\n}\n\n[hyoo_rdf_value] {\n\tdisplay: flex;\n\tbox-shadow: 0 0 0 1px var(--mol_theme_line);\n\tbackground: var(--mol_theme_back);\n\tpadding: var(--mol_gap_text);\n}\n");
+    $mol_style_attach("hyoo/rdf/rdf.view.css", "[hyoo_rdf_tools] {\n\tflex-grow: 0;\n}\n\n[hyoo_rdf_body] {\n\tpadding: 0;\n}\n\n[hyoo_rdf_subjects] {\n\tmargin: var(--mol_gap_block);\n\tdisplay: flex;\n\tflex-direction: column;\n}\n\n[hyoo_rdf_subject_row] {\n\tdisplay: flex;\n\talign-items: flex-start;\n}\n\n[hyoo_rdf_subject] {\n\tflex: 1 100 15rem;\n\tposition: sticky;\n\ttop: 0;\n}\n\n[hyoo_rdf_predicates] {\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex: 100 1 75%;\n}\n\n[hyoo_rdf_predicate_row] {\n\tdisplay: flex;\n\talign-items: flex-start;\n}\n\n[hyoo_rdf_predicate] {\n\tflex: 1 100 15rem;\n\tposition: sticky;\n\ttop: 0;\n}\n\n[hyoo_rdf_objects] {\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex: 100 1 66%;\n}\n\n[hyoo_rdf_resource] {\n\tdisplay: flex;\n\tmin-height: calc( 1.5em + 1rem );\n}\n\n[hyoo_rdf_value] {\n\tdisplay: flex;\n\tpadding: var(--mol_gap_text);\n}\n");
 })($ || ($ = {}));
 //hyoo/rdf/-css/rdf.view.css.ts
 ;
@@ -5578,7 +5556,7 @@ var $;
                 return Object.keys(data).map(subject => this.Subject_row(subject));
             }
             subject_title(uri) {
-                return uri.replace(/.*[\/#]/, '') || '#';
+                return decodeURIComponent(uri.replace(/.*[\/#]/, '')) || '#';
             }
             subject_uri(uri) {
                 return this.$.$mol_state_arg.link({ uri });
@@ -5588,7 +5566,7 @@ var $;
                 return Object.keys(data).map(predicate => this.Predicate_row({ subject, predicate }));
             }
             predicate_title({ subject, predicate }) {
-                return predicate.replace(/.*[\/#]/, '') || '#';
+                return decodeURIComponent(predicate.replace(/.*[\/#]/, '')) || '#';
             }
             predicate_uri({ subject, predicate }) {
                 return this.$.$mol_state_arg.link({ uri: predicate });
@@ -5603,7 +5581,7 @@ var $;
             }
             resource_title({ subject, predicate, object }) {
                 const data = this.data()[subject][predicate][object];
-                return data.resource.replace(/.*[\/#]/, '') || '#';
+                return decodeURIComponent(data.resource.replace(/.*[\/#]/, '')) || '#';
             }
             resource_uri({ subject, predicate, object }) {
                 const data = this.data()[subject][predicate][object];
