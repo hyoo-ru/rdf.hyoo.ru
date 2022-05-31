@@ -1,3 +1,7 @@
+[hyoo_rdf_tools] {
+	flex-grow: 0;
+}
+
 [hyoo_rdf_body] {
 	padding: 0;
 }
@@ -10,8 +14,6 @@
 
 [hyoo_rdf_subject_row] {
 	display: flex;
-	box-shadow: 0 0 0 1px var(--mol_theme_line);
-	background: var(--mol_theme_back);
 	align-items: flex-start;
 }
 
@@ -29,8 +31,6 @@
 
 [hyoo_rdf_predicate_row] {
 	display: flex;
-	box-shadow: 0 0 0 1px var(--mol_theme_line);
-	background: var(--mol_theme_back);
 	align-items: flex-start;
 }
 
@@ -48,14 +48,10 @@
 
 [hyoo_rdf_resource] {
 	display: flex;
-	box-shadow: 0 0 0 1px var(--mol_theme_line);
-	background: var(--mol_theme_back);
 	min-height: calc( 1.5em + 1rem );
 }
 
 [hyoo_rdf_value] {
 	display: flex;
-	box-shadow: 0 0 0 1px var(--mol_theme_line);
-	background: var(--mol_theme_back);
 	padding: var(--mol_gap_text);
 }
