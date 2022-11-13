@@ -119,6 +119,7 @@
     "$mol_string",
     "$mol_hotkey",
     "$mol_keyboard",
+    "$mol_layer",
     "$mol_lights_toggle",
     "$mol_check_icon",
     "$mol_check",
