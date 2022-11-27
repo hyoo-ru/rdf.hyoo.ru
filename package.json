@@ -113,6 +113,7 @@
     "$mol_state_time",
     "$mol_svg_path",
     "$mol_state_arg",
+    "$mol_action",
     "$mol_theme_auto",
     "$mol_lights",
     "$mol_media",
@@ -137,7 +138,6 @@
     "$mol_support_css",
     "$mol_support",
     "$mol_fetch",
-    "$mol_action",
     "$mol_wire_sync",
     "$mol_dom_parse"
   ],
