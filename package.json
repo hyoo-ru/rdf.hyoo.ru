@@ -114,6 +114,7 @@
     "$mol_media",
     "$mol_string",
     "$mol_hotkey",
+    "$mol_keyboard_code",
     "$mol_keyboard",
     "$mol_layer",
     "$mol_lights_toggle",
