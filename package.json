@@ -112,7 +112,6 @@
     "$mol_action",
     "$mol_theme_auto",
     "$mol_lights",
-    "$mol_media",
     "$mol_string",
     "$mol_hotkey",
     "$mol_keyboard_code",
