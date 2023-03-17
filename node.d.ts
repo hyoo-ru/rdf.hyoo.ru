@@ -1844,7 +1844,7 @@ declare namespace $.$$ {
         object_rows({ subject, predicate }: {
             subject: string;
             predicate: string;
-        }): $mol_view[];
+        }): ($mol_view | $mol_link)[];
         resource_title({ subject, predicate, object }: {
             subject: string;
             predicate: string;
