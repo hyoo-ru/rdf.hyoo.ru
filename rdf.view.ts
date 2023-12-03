@@ -1,5 +1,7 @@
 namespace $.$$ {
 
+	export type $hyoo_rdf_resource_key = { subject : string , predicate : string , index : number }
+
 	export class $hyoo_rdf extends $.$hyoo_rdf {
 
 		uri( next? : string ) {
@@ -78,24 +80,25 @@ namespace $.$$ {
 		@ $mol_mem_key
 		object_rows( { subject , predicate } : { subject : string , predicate : string } ) {
 			const data = this.data()[ subject ][ predicate ]
-			return Object.keys( data ).map( object => {
-				if( data[ object ].resource ) return this.Resource({ subject , predicate , object })
-				return this.Value({ subject , predicate , object })
-			} )
+
+			return data.map((val, index) => {
+				if( val.resource ) return this.Resource({ subject , predicate , index })
+				return this.Value({ subject , predicate , index })
+			})
 		}
 
-		resource_title( { subject , predicate , object } : { subject : string , predicate : string , object : string } ) {
-			const data = this.data()[ subject ][ predicate ][ object ]
+		resource_title( { subject , predicate , index } : $hyoo_rdf_resource_key ) {
+			const data = this.data()[ subject ][ predicate ][ index ]
 			return decodeURIComponent( data.resource.replace( /.*[\/#]/ , '' ) ) || '#'
 		}
 
-		resource_uri( { subject , predicate , object } : { subject : string , predicate : string , object : string } ) {
-			const data = this.data()[ subject ][ predicate ][ object ]
+		resource_uri( { subject , predicate , index } : $hyoo_rdf_resource_key ) {
+			const data = this.data()[ subject ][ predicate ][ index ]
 			return this.$.$mol_state_arg.link({ uri : data.resource })
 		}
 
-		value( { subject , predicate , object } : { subject : string , predicate : string , object : string } ) {
-			return this.data()[ subject ][ predicate ][ object ].value
+		value( { subject , predicate , index } : $hyoo_rdf_resource_key ) {
+			return this.data()[ subject ][ predicate ][ index ].value
 		}
 
 	}
