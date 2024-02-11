@@ -1,6 +1,6 @@
 $mol_scroll $mol_view
-	scroll_top?val 0
-	scroll_left?val 0
+	scroll_top? 0
+	scroll_left? 0
 	field *
 		^
 		tabIndex <= tabindex -1
@@ -26,8 +26,10 @@ $mol_page $mol_view
 				<= Tools $mol_view
 					sub <= tools /$mol_view_content
 		<= Body $mol_scroll
-			scroll_top?val => body_scroll_top?val
-			sub <= body /$mol_view_content
+			scroll_top? => body_scroll_top?
+			sub <= body_content /
+				<= Body_content $mol_view
+					sub <= body /$mol_view
 		<= Foot $mol_view
 			dom_name \footer
 			sub <= foot /$mol_view
@@ -35,6 +37,9 @@ $mol_page $mol_view
 $mol_link $mol_view
 	uri \
 	dom_name \a
+	uri_off \
+	uri_native null
+	external false
 	attr *
 		^
 		href <= uri_toggle \
@@ -42,6 +47,7 @@ $mol_link $mol_view
 		target <= target \_self
 		download <= file_name \
 		mol_link_current <= current false
+		rel <= relation \
 	sub /$mol_view_content
 		<= title
 	arg *
@@ -66,15 +72,16 @@ $mol_string $mol_view
 	enabled true
 	minimal_height 40
 	autocomplete false
-	selection?val /number
+	selection? /number
 		0
 		0
 	auto /
 		<= selection_watcher null
+		<= error_report null
 	field *
 		^
 		disabled <= disabled false
-		value <= value_changed?val <=> value?val \
+		value <= value_changed? <=> value? \
 		placeholder <= hint_visible <= hint \
 		spellcheck <= spellcheck true
 		autocomplete <= autocomplete_native \
@@ -85,7 +92,7 @@ $mol_string $mol_view
 	attr *
 		^
 		maxlength <= length_max +Infinity
-		type <= type?val \text
+		type <= type? \text
 	event *
 		^
 		input?event <=> event_change?event null
@@ -179,14 +186,16 @@ $mol_icon_brightness_6 $mol_icon path \M12,18V6C15.31,6 18,8.69 18,12C18,15.31 1
 $mol_lights_toggle $mol_check_icon
 	Icon <= Lights_icon $mol_icon_brightness_6
 	hint @ \Toggle lights
-	checked?val <=> lights?val false
+	checked? <=> lights? false
 
-$mol_icon_github_circle $mol_icon path \M12,2C6.48,2 2,6.48 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12C22,6.48 17.52,2 12,2Z
+$mol_icon_script $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2H8C6.3,2 5,3.3 5,5V16H16V17C16,17.6 16.4,18 17,18H18V5C18,4.4 18.4,4 19,4C19.6,4 20,4.4 20,5V6H22V5C22,3.3 20.7,2 19,2Z
+
+$mol_icon_script_text $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2C20.7,2 22,3.3 22,5V6H20V5C20,4.4 19.6,4 19,4C18.4,4 18,4.4 18,5V18H17C16.4,18 16,17.6 16,17V16H5V5C5,3.3 6.3,2 8,2H19M8,6V8H15V6H8M8,10V12H14V10H8Z
 
 $mol_link_source $mol_link
 	hint @ \Source code
 	sub /
-		<= Icon $mol_icon_github_circle
+		<= Icon $mol_icon_script_text
 
 $mol_list $mol_view
 	render_visible_only true
@@ -205,7 +214,7 @@ $hyoo_rdf $mol_page
 	title @ \RDF graph browser
 	head /
 		<= Uri $mol_string
-			value?val <=> uri?val \http://dbpedia.org/ontology/
+			value? <=> uri? \http://dbpedia.org/ontology/
 			hint <= uri_hint \URI
 		<= Tools
 	tools /
@@ -213,17 +222,17 @@ $hyoo_rdf $mol_page
 		<= Source_link $mol_link_source
 			uri \https://github.com/hyoo-ru/rdf.hyoo.ru
 	body / <= Subjects $mol_list rows <= subject_rows /
-	Subject_row!uri $mol_view sub /
-		<= Subject!uri $mol_link
-			title <= subject_title!uri \
-			uri <= subject_uri!uri \
-		<= Predicates!uri $mol_list rows <= predicate_rows!uri /
-	Predicate_row!id $mol_view sub /
-		<= Predicate!id $mol_link
-			title <= predicate_title!id \
-			uri <= predicate_uri!id \
-		<= Objects!id $mol_list rows <= object_rows!id /
-	Resource!id $mol_link
-		title <= resource_title!id \
-		uri <= resource_uri!id \
-	Value!id $mol_view sub / <= value!id \
+	Subject_row* $mol_view sub /
+		<= Subject* $mol_link
+			title <= subject_title* \
+			uri <= subject_uri* \
+		<= Predicates* $mol_list rows <= predicate_rows* /
+	Predicate_row* $mol_view sub /
+		<= Predicate* $mol_link
+			title <= predicate_title* \
+			uri <= predicate_uri* \
+		<= Objects* $mol_list rows <= object_rows* /
+	Resource* $mol_link
+		title <= resource_title* \
+		uri <= resource_uri* \
+	Value* $mol_view sub / <= value* \
