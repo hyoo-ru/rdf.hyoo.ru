@@ -1042,57 +1042,57 @@ declare namespace $ {
 
 declare namespace $ {
 
-	type $mol_view__dom_name__4MRXSHJA = $mol_type_enforce<
+	type $mol_view__dom_name__QKJII397 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_view['dom_name'] >
 	>
-	type $mol_view__sub__DKITQY6T = $mol_type_enforce<
+	type $mol_view__sub__0F1FY4VI = $mol_type_enforce<
 		ReturnType< $mol_page['title_content'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub__FUIZLDO0 = $mol_type_enforce<
+	type $mol_view__sub__A267ZR8M = $mol_type_enforce<
 		ReturnType< $mol_page['tools'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__minimal_height__FNEB8F1I = $mol_type_enforce<
+	type $mol_view__minimal_height__PWA0J9WM = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_view['minimal_height'] >
 	>
-	type $mol_view__dom_name__MWZ7FW2Q = $mol_type_enforce<
+	type $mol_view__dom_name__XDD733Z1 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_view['dom_name'] >
 	>
-	type $mol_view__sub__9RC9O6KF = $mol_type_enforce<
+	type $mol_view__sub__XEPN6LJB = $mol_type_enforce<
 		ReturnType< $mol_page['head'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_page_body_scroll_top__H4Q106OK = $mol_type_enforce<
+	type $mol_page_body_scroll_top__E4NVEM4I = $mol_type_enforce<
 		Parameters< $mol_page['body_scroll_top'] >[0]
 		,
 		Parameters< ReturnType< $mol_page['Body'] >['scroll_top'] >[0]
 	>
-	type $mol_view__sub__F5C6056G = $mol_type_enforce<
+	type $mol_view__sub__07YDC18C = $mol_type_enforce<
 		ReturnType< $mol_page['body'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_scroll__sub__9J5KGNOD = $mol_type_enforce<
+	type $mol_scroll__sub__LFFP1082 = $mol_type_enforce<
 		ReturnType< $mol_page['body_content'] >
 		,
 		ReturnType< $mol_scroll['sub'] >
 	>
-	type $mol_view__dom_name__5R1FFPDK = $mol_type_enforce<
+	type $mol_view__dom_name__2XY0KMH5 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_view['dom_name'] >
 	>
-	type $mol_view__sub__6TGR2P6W = $mol_type_enforce<
+	type $mol_view__sub__ZS5T8COB = $mol_type_enforce<
 		ReturnType< $mol_page['foot'] >
 		,
 		ReturnType< $mol_view['sub'] >
@@ -1194,6 +1194,99 @@ declare namespace $ {
         static value<Value>(key: string, next?: Value | null): Value | null;
         prefix(): string;
         value(key: string, next?: Value): Value | null;
+    }
+}
+
+declare namespace $ {
+    type $mol_charset_encoding = 'utf8' | 'utf-16le' | 'utf-16be' | 'ibm866' | 'iso-8859-2' | 'iso-8859-3' | 'iso-8859-4' | 'iso-8859-5' | 'iso-8859-6' | 'iso-8859-7' | 'iso-8859-8' | 'iso-8859-8i' | 'iso-8859-10' | 'iso-8859-13' | 'iso-8859-14' | 'iso-8859-15' | 'iso-8859-16' | 'koi8-r' | 'koi8-u' | 'koi8-r' | 'macintosh' | 'windows-874' | 'windows-1250' | 'windows-1251' | 'windows-1252' | 'windows-1253' | 'windows-1254' | 'windows-1255' | 'windows-1256' | 'windows-1257' | 'windows-1258' | 'x-mac-cyrillic' | 'gbk' | 'gb18030' | 'hz-gb-2312' | 'big5' | 'euc-jp' | 'iso-2022-jp' | 'shift-jis' | 'euc-kr' | 'iso-2022-kr';
+}
+
+declare namespace $ {
+    function $mol_charset_decode(buffer: BufferSource, encoding?: $mol_charset_encoding): string;
+}
+
+declare namespace $ {
+    function $mol_charset_encode(value: string): Uint8Array;
+}
+
+declare namespace $ {
+    type $mol_file_type = 'file' | 'dir' | 'link';
+    interface $mol_file_stat {
+        type: $mol_file_type;
+        size: number;
+        atime: Date;
+        mtime: Date;
+        ctime: Date;
+    }
+    class $mol_file_not_found extends Error {
+    }
+    abstract class $mol_file extends $mol_object {
+        static absolute(path: string): $mol_file;
+        static relative(path: string): $mol_file;
+        static base: string;
+        path(): string;
+        parent(): $mol_file;
+        abstract stat(next?: $mol_file_stat | null, virt?: 'virt'): $mol_file_stat | null;
+        reset(): void;
+        version(): string;
+        abstract ensure(): void;
+        abstract drop(): void;
+        watcher(): {
+            destructor(): void;
+        };
+        exists(next?: boolean): boolean;
+        type(): "" | $mol_file_type;
+        name(): string;
+        ext(): string;
+        abstract buffer(next?: Uint8Array): Uint8Array;
+        text(next?: string, virt?: 'virt'): string;
+        abstract sub(): $mol_file[];
+        abstract resolve(path: string): $mol_file;
+        abstract relate(base?: $mol_file): string;
+        abstract append(next: Uint8Array | string): void;
+        find(include?: RegExp, exclude?: RegExp): $mol_file[];
+        size(): number;
+        open(...modes: readonly ('create' | 'exists_truncate' | 'exists_fail' | 'read_only' | 'write_only' | 'read_write' | 'append')[]): number;
+        toJSON(): string;
+    }
+}
+
+declare namespace $ {
+    function $mol_compare_array<Value extends ArrayLike<unknown>>(a: Value, b: Value): boolean;
+}
+
+declare namespace $ {
+    enum $mol_file_mode_open {
+        create,
+        exists_truncate,
+        exists_fail,
+        read_only,
+        write_only,
+        read_write,
+        append
+    }
+    class $mol_file_node extends $mol_file {
+        static absolute(path: string): $mol_file_node;
+        static relative(path: string): $mol_file_node;
+        watcher(): {
+            destructor(): void;
+        };
+        stat(next?: $mol_file_stat | null, virt?: 'virt'): $mol_file_stat | null;
+        ensure(): void;
+        drop(): void;
+        buffer(next?: Uint8Array): Uint8Array;
+        sub(): $mol_file[];
+        resolve(path: string): $mol_file;
+        relate(base?: $mol_file): string;
+        append(next: Uint8Array | string): undefined;
+        open(...modes: readonly (keyof typeof $mol_file_mode_open)[]): number;
+    }
+}
+
+declare namespace $ {
+    class $mol_state_local_node<Value> extends $mol_state_local<Value> {
+        static dir(): $mol_file;
+        static value<Value>(key: string, next?: Value | null): Value | null;
     }
 }
 
@@ -1458,12 +1551,12 @@ declare namespace $ {
 
 declare namespace $ {
 
-	type $mol_hotkey__mod_ctrl__ZXNURI18 = $mol_type_enforce<
+	type $mol_hotkey__mod_ctrl__2UWN7Y8N = $mol_type_enforce<
 		ReturnType< $mol_string['submit_with_ctrl'] >
 		,
 		ReturnType< $mol_hotkey['mod_ctrl'] >
 	>
-	type $mol_hotkey__key__NTCUPBIL = $mol_type_enforce<
+	type $mol_hotkey__key__N7QE9YUF = $mol_type_enforce<
 		({ 
 			enter( next?: ReturnType< $mol_string['submit'] > ): ReturnType< $mol_string['submit'] >,
 		}) 
@@ -1559,7 +1652,7 @@ declare namespace $ {
 //# sourceMappingURL=speck.view.tree.d.ts.map
 declare namespace $ {
 
-	type $mol_speck__value__2WKORWWQ = $mol_type_enforce<
+	type $mol_speck__value__6LGTEAKL = $mol_type_enforce<
 		ReturnType< $mol_button['error'] >
 		,
 		ReturnType< $mol_speck['value'] >
@@ -1643,7 +1736,7 @@ declare namespace $ {
 
 declare namespace $ {
 
-	type $mol_view__sub__6H4TVFQF = $mol_type_enforce<
+	type $mol_view__sub__WL2HKQYS = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -1751,7 +1844,7 @@ declare namespace $ {
 
 declare namespace $ {
 
-	type $mol_svg_path__geometry__OZB08Z5F = $mol_type_enforce<
+	type $mol_svg_path__geometry__JB9OQT0A = $mol_type_enforce<
 		ReturnType< $mol_icon['path'] >
 		,
 		ReturnType< $mol_svg_path['geometry'] >
@@ -1777,91 +1870,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=6.view.tree.d.ts.map
-declare namespace $ {
-    type $mol_charset_encoding = 'utf8' | 'utf-16le' | 'utf-16be' | 'ibm866' | 'iso-8859-2' | 'iso-8859-3' | 'iso-8859-4' | 'iso-8859-5' | 'iso-8859-6' | 'iso-8859-7' | 'iso-8859-8' | 'iso-8859-8i' | 'iso-8859-10' | 'iso-8859-13' | 'iso-8859-14' | 'iso-8859-15' | 'iso-8859-16' | 'koi8-r' | 'koi8-u' | 'koi8-r' | 'macintosh' | 'windows-874' | 'windows-1250' | 'windows-1251' | 'windows-1252' | 'windows-1253' | 'windows-1254' | 'windows-1255' | 'windows-1256' | 'windows-1257' | 'windows-1258' | 'x-mac-cyrillic' | 'gbk' | 'gb18030' | 'hz-gb-2312' | 'big5' | 'euc-jp' | 'iso-2022-jp' | 'shift-jis' | 'euc-kr' | 'iso-2022-kr';
-}
-
-declare namespace $ {
-    function $mol_charset_decode(buffer: BufferSource, encoding?: $mol_charset_encoding): string;
-}
-
-declare namespace $ {
-    function $mol_charset_encode(value: string): Uint8Array;
-}
-
-declare namespace $ {
-    type $mol_file_type = 'file' | 'dir' | 'link';
-    interface $mol_file_stat {
-        type: $mol_file_type;
-        size: number;
-        atime: Date;
-        mtime: Date;
-        ctime: Date;
-    }
-    class $mol_file_not_found extends Error {
-    }
-    abstract class $mol_file extends $mol_object {
-        static absolute(path: string): $mol_file;
-        static relative(path: string): $mol_file;
-        static base: string;
-        path(): string;
-        parent(): $mol_file;
-        abstract stat(next?: $mol_file_stat | null, virt?: 'virt'): $mol_file_stat | null;
-        reset(): void;
-        version(): string;
-        abstract ensure(): void;
-        abstract drop(): void;
-        watcher(): {
-            destructor(): void;
-        };
-        exists(next?: boolean): boolean;
-        type(): "" | $mol_file_type;
-        name(): string;
-        ext(): string;
-        abstract buffer(next?: Uint8Array): Uint8Array;
-        text(next?: string, virt?: 'virt'): string;
-        abstract sub(): $mol_file[];
-        abstract resolve(path: string): $mol_file;
-        abstract relate(base?: $mol_file): string;
-        abstract append(next: Uint8Array | string): void;
-        find(include?: RegExp, exclude?: RegExp): $mol_file[];
-        size(): number;
-        open(...modes: readonly ('create' | 'exists_truncate' | 'exists_fail' | 'read_only' | 'write_only' | 'read_write' | 'append')[]): number;
-    }
-}
-
-declare namespace $ {
-    function $mol_compare_array<Value extends ArrayLike<unknown>>(a: Value, b: Value): boolean;
-}
-
-declare namespace $ {
-    enum $mol_file_mode_open {
-        create,
-        exists_truncate,
-        exists_fail,
-        read_only,
-        write_only,
-        read_write,
-        append
-    }
-    class $mol_file_node extends $mol_file {
-        static absolute(path: string): $mol_file_node;
-        static relative(path: string): $mol_file_node;
-        watcher(): {
-            destructor(): void;
-        };
-        stat(next?: $mol_file_stat | null, virt?: 'virt'): $mol_file_stat | null;
-        ensure(): void;
-        drop(): void;
-        buffer(next?: Uint8Array): Uint8Array;
-        sub(): $mol_file[];
-        resolve(path: string): $mol_file;
-        relate(base?: $mol_file): string;
-        append(next: Uint8Array | string): undefined;
-        open(...modes: readonly (keyof typeof $mol_file_mode_open)[]): number;
-    }
-}
-
 declare namespace $ {
     interface $mol_locale_dict {
         [key: string]: string;
@@ -1983,14 +1991,14 @@ declare namespace $ {
 
 declare namespace $ {
 
-	type $mol_view__style__3LQWEHRY = $mol_type_enforce<
+	type $mol_view__style__XBRB6HCG = $mol_type_enforce<
 		({ 
 			'paddingTop': ReturnType< $mol_list['gap_before'] >,
 		}) 
 		,
 		ReturnType< $mol_view['style'] >
 	>
-	type $mol_view__style__DXUXXVK7 = $mol_type_enforce<
+	type $mol_view__style__S0LQMQZV = $mol_type_enforce<
 		({ 
 			'paddingTop': ReturnType< $mol_list['gap_after'] >,
 		}) 
@@ -2068,77 +2076,77 @@ declare namespace $ {
 
 declare namespace $ {
 
-	type $mol_string__value__RMNGN0UD = $mol_type_enforce<
+	type $mol_string__value__NKW1TZ34 = $mol_type_enforce<
 		ReturnType< $hyoo_rdf['uri'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_string__hint__G7NS1RFJ = $mol_type_enforce<
+	type $mol_string__hint__7G4E8XPM = $mol_type_enforce<
 		ReturnType< $hyoo_rdf['uri_hint'] >
 		,
 		ReturnType< $mol_string['hint'] >
 	>
-	type $mol_link_source__uri__ECQHHNW0 = $mol_type_enforce<
+	type $mol_link_source__uri__T1AAEA43 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link_source['uri'] >
 	>
-	type $mol_list__rows__DNINK1SP = $mol_type_enforce<
+	type $mol_list__rows__481YUA4T = $mol_type_enforce<
 		ReturnType< $hyoo_rdf['subject_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_link__title__JA9DBX0H = $mol_type_enforce<
+	type $mol_link__title__UMORFR6N = $mol_type_enforce<
 		ReturnType< $hyoo_rdf['subject_title'] >
 		,
 		ReturnType< $mol_link['title'] >
 	>
-	type $mol_link__uri__F9Q0G5IX = $mol_type_enforce<
+	type $mol_link__uri__2M7C2EPV = $mol_type_enforce<
 		ReturnType< $hyoo_rdf['subject_uri'] >
 		,
 		ReturnType< $mol_link['uri'] >
 	>
-	type $mol_list__rows__J801SX0K = $mol_type_enforce<
+	type $mol_list__rows__DA2ZQSI2 = $mol_type_enforce<
 		ReturnType< $hyoo_rdf['predicate_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_link__title__RHQK5PSN = $mol_type_enforce<
+	type $mol_link__title__AQ83CTU6 = $mol_type_enforce<
 		ReturnType< $hyoo_rdf['predicate_title'] >
 		,
 		ReturnType< $mol_link['title'] >
 	>
-	type $mol_link__uri__SDNKVU9T = $mol_type_enforce<
+	type $mol_link__uri__ZYJ2MX0D = $mol_type_enforce<
 		ReturnType< $hyoo_rdf['predicate_uri'] >
 		,
 		ReturnType< $mol_link['uri'] >
 	>
-	type $mol_list__rows__5IK52PW8 = $mol_type_enforce<
+	type $mol_list__rows__1UBEHI3R = $mol_type_enforce<
 		ReturnType< $hyoo_rdf['object_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_view__sub__LUF70ZI9 = $mol_type_enforce<
+	type $mol_view__sub__S8NTQ8ZR = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub__Z2FBRZT1 = $mol_type_enforce<
+	type $mol_view__sub__SMBH99R7 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_link__title__9M4NZ6R6 = $mol_type_enforce<
+	type $mol_link__title__ZTYR6DNG = $mol_type_enforce<
 		ReturnType< $hyoo_rdf['resource_title'] >
 		,
 		ReturnType< $mol_link['title'] >
 	>
-	type $mol_link__uri__4NASO2XJ = $mol_type_enforce<
+	type $mol_link__uri__OI853GMJ = $mol_type_enforce<
 		ReturnType< $hyoo_rdf['resource_uri'] >
 		,
 		ReturnType< $mol_link['uri'] >
 	>
-	type $mol_view__sub__1UVKFQVB = $mol_type_enforce<
+	type $mol_view__sub__FORVE8WI = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
